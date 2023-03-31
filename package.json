@@ -1,0 +1,20 @@
+{
+  "name": "auto-release-solution",
+  "version": "0.0.1",
+  "description": "auto release solution by `release please package`",
+  "main": "index.js",
+  "repository": "git@github.com:vios-onboarding/ars.git",
+  "author": "Vital'ka <vios.job@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf dist && node esbuild.js",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.5.1",
+    "@commitlint/config-conventional": "^17.4.4",
+    "esbuild": "^0.17.14",
+    "husky": "^8.0.3"
+  }
+}
