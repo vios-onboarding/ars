@@ -41,6 +41,6 @@ jobs:
           default-branch: main
           token: ${{secrets.GITHUB_TOKEN}}
           package-name: ars
-#          path: build/
+          path: build/
           pull-request-title-pattern: "chore${scope}: to release${component} ${version}"
           pull-request-header: ":robot: I have created a release"
