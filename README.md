@@ -31,6 +31,58 @@ $ yarn add -D husky @commitlint/{cli,config-conventional}
 
 ### Release please configs
 
+#### github workflow (action)
+
+Have two jobs for build  and bum version and release
+
+```yaml
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+name: Create release
+
+jobs:
+  build:
+    name: Build pkg
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Build
+        run: |
+          yarn -y && yarn build
+      - name: Upload build
+        uses: actions/upload-artifact@v3
+        with:
+          name: ars
+          path: build
+  release-please:
+    name: Bump+CL+release
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v3
+        with:
+          name: ars
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: node
+          token: ${{secrets.GITHUB_TOKEN}}
+          package-name: ars
+          path: build/
+          pull-request-title-pattern: "chore${scope}: to release${component} ${version}"
+
+```
+
 #### manifest
 ```json
 {
@@ -62,9 +114,9 @@ Release Please assumes you are using [Conventional Commit messages](https://www.
 
 The most important prefixes you should have in mind are:
 
-`fix`: which represents _bug fixes_, and correlates to a [SemVer](https://semver.org/) patch.
-`feat`: which represents a _new feature_, and correlates to a SemVer minor.
-`feat!`:, or fix!:, refactor!:, etc., which represent a breaking change (indicated by the !) and will result in a SemVer major.
+`fix`: which represents _bug fixes_, and correlates to a [SemVer](https://semver.org/) patch.   
+`feat`: which represents a _new feature_, and correlates to a SemVer minor.   
+`feat!`:, or fix!:, refactor!:, etc., which represent a breaking change (indicated by the !) and will result in a SemVer major.   
 
 #### Examples
 ```text
@@ -90,6 +142,8 @@ The above commit message will contain:
 ### Bump version
 
 ```git commit -m "chore: release 2.0.0\n\nRelease-As: 2.0.0"```
+
+> ⚠️  A releasable unit is a commit to the branch with one of the following prefixes: "**feat**", "**fix**", and "**deps**". (A "chore" or "build" commit is not a releasable unit.)
 
 ### Fix release notes (during merge PR, squash message, or amend commit)
 
