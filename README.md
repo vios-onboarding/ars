@@ -155,3 +155,11 @@ fix: another message
 chore: a third message
 END_COMMIT_OVERRIDE
 ```
+
+<br>
+
+<div align="center">
+  <!-- Зроблено з любов'ю -->
+    <img src="https://img.shields.io/badge/%D0%97%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BD%D0%BE%20%D0%B7-%E2%99%A5%EF%B8%8F-red.svg?longCache=true&style=for-the-badge&colorA=blue&colorB=yellow"
+      alt="Зроблено з любов'ю" />
+</div>
