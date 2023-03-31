@@ -18,14 +18,19 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Create <.env> file
+        run: |
+          touch .env
+          echo TEST_ARS=${{ secrets.TEST_ARS }} >> .env
       - name: Build
         run: |
-          yarn -y && yarn build
+          yarn -y && yarn build && yarn start
       - name: Upload build
         uses: actions/upload-artifact@v3
         with:
           name: ars
           path: build
+          retention-days: 3
   release-please:
     name: Bump+CL+release
     runs-on: ubuntu-latest
