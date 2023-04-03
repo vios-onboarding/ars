@@ -110,13 +110,13 @@ jobs:
 
 ### Conventional commit message part:
 
-Release Please assumes you are using [Conventional Commit messages](https://www.conventionalcommits.org/).
+Release Please assume you are using [Conventional Commit messages](https://www.conventionalcommits.org/).
 
 The most important prefixes you should have in mind are:
 
 `fix`: which represents _bug fixes_, and correlates to a [SemVer](https://semver.org/) patch.   
 `feat`: which represents a _new feature_, and correlates to a SemVer minor.   
-`feat!`:, or fix!:, refactor!:, etc., which represent a breaking change (indicated by the !) and will result in a SemVer major.   
+`feat!`:, or `fix!`:, `refactor!`:, etc., which represent a breaking change (indicated by the !) and will result in a SemVer major.   
 
 #### Examples
 ```text
