@@ -1,6 +1,6 @@
 {
   "name": "auto-release-solution",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "auto release solution by `release-please package`",
   "main": "buil/index.js",
   "repository": "git@github.com:vios-onboarding/ars.git",
