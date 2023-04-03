@@ -18,6 +18,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
       - name: Create <.env> file
         run: |
           touch .env
@@ -42,6 +44,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ars
+      - name: check
+        run: |
+          echo "${{ steps.releaser.outputs }}"
       - uses: google-github-actions/release-please-action@v3
         id: releaser
         with:
@@ -55,7 +60,7 @@ jobs:
   publish:
     name: publication to repo
     runs-on: ubuntu-latest
-    if: ${{ needs.release-please.outputs.release_created }}
+    if: ${{ needs.release-please.outputs.status }}
     needs: release-please
     steps:
       - name: test by prev output job variables
