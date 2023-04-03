@@ -1,7 +1,7 @@
 {
   "release-type": "node",
   "packages": {
-    "src": {
+    ".": {
       "changelog-path": "CHANGELOG.md",
       "release-type": "node",
       "bump-minor-pre-major": false,
