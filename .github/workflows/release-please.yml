@@ -43,8 +43,8 @@ jobs:
         with:
           name: ars
       - uses: google-github-actions/release-please-action@v3
+        id: releaser
         with:
-          id: releaser
           release-type: node
           default-branch: main
           token: ${{secrets.GITHUB_TOKEN}}
