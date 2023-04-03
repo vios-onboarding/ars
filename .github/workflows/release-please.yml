@@ -53,11 +53,12 @@ jobs:
           pull-request-title-pattern: "chore${scope}: to release${component} ${version}"
           pull-request-header: ":robot: I have created a release"
   publish:
-    name: publish to repo
+    name: publication to repo
     runs-on: ubuntu-latest
-#    if: ${{ needs.release-please.outputs.release_created }}
+    if: ${{ needs.release-please.outputs.release_created }}
     needs: release-please
     steps:
       - name: test by prev output job variables
         run: |
+          echo "OK. next publication ..."
           echo "release-please release created: ${{ needs.release-please.outputs.status }}"
