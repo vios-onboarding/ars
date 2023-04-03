@@ -46,11 +46,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ars
-#      - name: check
-#        run: |
-#          echo "status -> ${{ steps.status.outputs.status }}"
-#          echo "major -> ${{ steps.status.outputs.major }}"
-#          echo "minor -> ${{ steps.status.outputs.minor }}"
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
@@ -58,9 +53,12 @@ jobs:
           default-branch: main
           token: ${{ secrets.GITHUB_TOKEN }}
           package-name: ars
-          path: src
+#          path: src
           pull-request-title-pattern: "chore${scope}: to release${component} ${version}"
           pull-request-header: ":robot: I have created a release"
+      - name: check
+        run: |
+          echo "status -> ${{ steps.release.outputs.releases_created }}"
 #      - id: status
 #        run: |
 #          echo "status=${{ steps.release.outputs.release_created }}" >> "$GITHUB_OUTPUT"
@@ -74,4 +72,7 @@ jobs:
     steps:
       - name: test by prev output job variables
         run: |
-          echo "release-please 1 release_created: ${{ needs.releaser.outputs.status }}"
+          echo "release-please:\n\n1 release_created: ${{ needs.releaser.outputs.status }}"
+          echo "2 tag: ${{ needs.releaser.outputs.tag_name }}"
+          echo "3 commit: ${{ needs.releaser.outputs.sha }}"
+          echo "4 PR: ${{ needs.releaser.outputs.pr }}"
