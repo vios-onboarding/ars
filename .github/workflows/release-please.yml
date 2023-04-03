@@ -33,12 +33,14 @@ jobs:
           name: ars
           path: build
           retention-days: 3
-  releaseplease:
+  releaser:
     name: Bump+CL+release
     runs-on: ubuntu-latest
     needs: build
     outputs:
-      status: ${{ steps.releaser.outputs.release_created }}
+      status: ${{ steps.release.outputs.release_created }}
+      minor: ${{ steps.release.outputs.minor }}
+      major: ${{ steps.release.outputs.major }}
     steps:
       - name: Download build
         uses: actions/download-artifact@v3
@@ -46,27 +48,33 @@ jobs:
           name: ars
       - name: check
         run: |
-          echo "${{ steps.save-status.outputs.status }}"
+          echo "status -> ${{ steps.status.outputs.status }}"
+          echo "major -> ${{ steps.status.outputs.major }}"
+          echo "minor -> ${{ steps.status.outputs.minor }}"
       - uses: google-github-actions/release-please-action@v3
-        id: releaser
+        id: release
         with:
           release-type: node
           default-branch: main
-          token: ${{secrets.GITHUB_TOKEN}}
+          token: ${{ secrets.GITHUB_TOKEN }}
           package-name: ars
           path: src
           pull-request-title-pattern: "chore${scope}: to release${component} ${version}"
           pull-request-header: ":robot: I have created a release"
-      - id: save-status
-        run: echo "status=${{steps.releaser.outputs.release_created}}" >> "$GITHUB_OUTPUT"
+      - id: status
+        run: |
+          echo "status=${{ steps.release.outputs.release_created }}" >> "$GITHUB_OUTPUT"
+          echo "minor=${{ steps.release.outputs.minor }}" >> "$GITHUB_OUTPUT"
+          echo "major=${{ steps.release.outputs.major }}" >> "$GITHUB_OUTPUT"
   publish:
     name: publication to repo
     runs-on: ubuntu-latest
-    needs: releaseplease
-#    if: ${{ needs.releaseplease.outputs.status }}
+    needs: releaser
+#    if: ${{ needs.releaser.outputs.status }}
     steps:
       - name: test by prev output job variables
         run: |
           echo "OK. next publication ..."
-          echo "release-please 1 release_created: ${{ needs.releaseplease.releaser.release_created }}"
-          echo "release-please 2 status: ${{ needs.releaseplease.outputs.status }}"
+          echo "release-please 1 release_created: ${{ needs.releaser.release.release_created }}"
+          echo "release-please 2 status: ${{ needs.releaser.outputs.status }}"
+          echo "release-please 3 minor: ${{ needs.releaser.outputs.minor }}"
