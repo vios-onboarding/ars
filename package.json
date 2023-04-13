@@ -11,7 +11,7 @@
     "start": "node -r dotenv/config build/index.js",
     "build": "rm -rf dist && node esbuild.js",
     "prepare": "husky install",
-    "release:pr": "release-please release-pr --token=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 --repo-url=vios-onboarding/ars"
+    "release:pr": "release-please release-pr --token=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 --repo-url=vios-onboarding/ars"
   },
   "devDependencies": {
     "@commitlint/cli": "17.5.1",

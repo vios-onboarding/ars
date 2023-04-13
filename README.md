@@ -33,7 +33,7 @@ $ yarn add -D husky @commitlint/{cli,config-conventional}
 
 #### github workflow (action)
 
-Have two jobs for build  and bum version and release
+Have two jobs for build and bum version and release
 
 ```yaml
 on:
@@ -84,6 +84,7 @@ jobs:
 ```
 
 #### manifest
+
 ```json
 {
   ".": "1.0.0"
@@ -91,6 +92,7 @@ jobs:
 ```
 
 #### config
+
 ```json
 {
   "release-type": "node",
@@ -110,15 +112,18 @@ jobs:
 
 ### Conventional commit message part:
 
-Release Please assume you are using [Conventional Commit messages](https://www.conventionalcommits.org/).
+Release Please assume you are
+using [Conventional Commit messages](https://www.conventionalcommits.org/).
 
 The most important prefixes you should have in mind are:
 
 `fix`: which represents _bug fixes_, and correlates to a [SemVer](https://semver.org/) patch.   
 `feat`: which represents a _new feature_, and correlates to a SemVer minor.   
-`feat!`:, or `fix!`:, `refactor!`:, etc., which represent a breaking change (indicated by the !) and will result in a SemVer major.   
+`feat!`:, or `fix!`:, `refactor!`:, etc., which represent a breaking change (indicated by the !) and
+will result in a SemVer major.
 
 #### Examples
+
 ```text
 feat: adds v4 UUID to crypto
 
@@ -133,17 +138,20 @@ feat(utils): update encode to support unicode
   PiperOrigin-RevId: 345559182
   Source-Link: googleapis/googleapis@e5eef86
 ```
+
 The above commit message will contain:
 
 * an entry for the "adds v4 UUID to crypto" feature.
-* an entry for the fix "unicode no longer throws exception", along with a note that it's a breaking change.
+* an entry for the fix "unicode no longer throws exception", along with a note that it's a breaking
+  change.
 * an entry for the feature "update encode to support unicode"
 
 ### Bump version
 
 ```git commit -m "chore: release 2.0.0\n\nRelease-As: 2.0.0"```
 
-> ⚠️  A releasable unit is a commit to the branch with one of the following prefixes: "**feat**", "**fix**", and "**deps**". (A "chore" or "build" commit is not a releasable unit.)
+> ⚠️ A releasable unit is a commit to the branch with one of the following prefixes: "**feat**", "*
+*fix**", and "**deps**". (A "chore" or "build" commit is not a releasable unit.)
 
 ### Fix release notes (during merge PR, squash message, or amend commit)
 
