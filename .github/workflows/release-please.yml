@@ -18,10 +18,6 @@ jobs:
       minor: ${{ steps.release.outputs.minor }}
       major: ${{ steps.release.outputs.major }}
     steps:
-      - name: ⟩ download build
-        uses: actions/download-artifact@v3
-        with:
-          name: ars
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
@@ -48,6 +44,12 @@ jobs:
       - name: ⟩ build
         run: |
           yarn -y && yarn build && yarn start
+      - name: ⟩ upload build
+        uses: actions/upload-artifact@v3
+        with:
+          name: ars
+          path: build
+          retention-days: 3
       - name: ⟩ test by prev output job variables
         run: |
           echo "release-please:\n\n1 release_created: ${{ needs.release.outputs.status }}"
