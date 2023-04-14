@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "17.5.1",
-    "@commitlint/config-conventional": "17.4.4",
+    "@commitlint/config-conventional": "17.6.1",
     "esbuild": "0.17.16",
     "husky": "8.0.3",
     "release-please": "15.9.2"
