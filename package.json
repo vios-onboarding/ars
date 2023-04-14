@@ -14,7 +14,7 @@
     "release:pr": "release-please release-pr --token=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 --repo-url=vios-onboarding/ars"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.5.1",
+    "@commitlint/cli": "17.6.1",
     "@commitlint/config-conventional": "17.4.4",
     "esbuild": "0.17.16",
     "husky": "8.0.3",
